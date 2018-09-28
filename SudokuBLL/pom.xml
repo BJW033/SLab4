@@ -88,6 +88,10 @@
 			<artifactId>commons-lang</artifactId>
 			<version>2.6</version>
 		</dependency>
-
+<dependency>
+	<groupId>org.webjars.npm</groupId>
+	<artifactId>shuffle-array</artifactId>
+	<version>1.0.1</version>
+</dependency>
 	</dependencies>
 </project>

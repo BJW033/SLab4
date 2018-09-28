@@ -258,4 +258,98 @@ public class SudokuTest {
 		assertTrue(Arrays.equals(Region5, s1.getRegion(5)));
 		
 	}
+	@Test
+	public void GetRegionNbrTest() {
+		int[][] puzzle = { { 5, 3, 4, 6, 7, 8, 9, 1, 2 }, { 6, 7, 2, 1, 9, 5, 3, 4, 8 }, { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, { 4, 2, 6, 8, 5, 3, 7, 9, 1 }, { 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, { 2, 8, 7, 4, 1, 9, 6, 3, 5 }, { 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+
+		try {
+			Sudoku s1 = new Sudoku(puzzle);
+			assertEquals(s1.getRegionNbr(0,0),0);
+			assertNotEquals(s1.getRegionNbr(0,0),2);
+
+		} catch (Exception e) {
+			fail("Test failed to build a Sudoku");
+		}
+	}
+	/*@Test
+	public void PrintPuzzleTest() {
+		int[][] puzzle = { { 5, 3, 4, 6, 7, 8, 9, 1, 2 }, { 6, 7, 2, 1, 9, 5, 3, 4, 8 }, { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, { 4, 2, 6, 8, 5, 3, 7, 9, 1 }, { 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, { 2, 8, 7, 4, 1, 9, 6, 3, 5 }, { 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		try {
+			Sudoku s1 = new Sudoku(puzzle);
+			s1.PrintPuzzle();
+		} catch (Exception e) {
+			fail("Test failed to build a Sudoku");
+		}
+	}*/
+	
+	@Test
+	public void FillDiagonalRegionsTest() {
+		int[][] puzzle = { { 5, 3, 4, 6, 7, 8, 9, 1, 2 }, { 6, 7, 2, 1, 9, 5, 3, 4, 8 }, { 1, 9, 8, 3, 4, 2, 5, 6, 7 },
+				{ 8, 5, 9, 7, 6, 1, 4, 2, 3 }, { 4, 2, 6, 8, 5, 3, 7, 9, 1 }, { 7, 1, 3, 9, 2, 4, 8, 5, 6 },
+				{ 9, 6, 1, 5, 3, 7, 2, 8, 4 }, { 2, 8, 7, 4, 1, 9, 6, 3, 5 }, { 3, 4, 5, 2, 8, 6, 1, 7, 9 } };
+		try {
+			Sudoku s1 = new Sudoku(puzzle);
+			s1.FillDiagonalRegions();
+			s1.PrintPuzzle();
+			
+		} catch (Exception e) {
+			fail("Test failed to build a Sudoku");
+		}
+	}
+	/*@Test 
+	public void SetRegionTest() {
+		int[][] puzzle = {{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0}
+			};
+		try {
+			Sudoku s1 = new Sudoku(puzzle);
+			s1.PrintPuzzle();
+			System.out.print("\n");
+			s1.setRegion(1);
+			s1.PrintPuzzle();
+			
+			
+		} catch (Exception e) {
+			fail("Test failed to build a Sudoku");
+		}
+		
+	}*/
+	
+	/*@Test 
+	public void ShuffleRegionTest() {
+		int[][] puzzle = {{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0},
+			{0,0,0,0,0,0,0,0,0}
+			};
+		try {
+			Sudoku s1 = new Sudoku(puzzle);
+			s1.PrintPuzzle();
+			System.out.print("\n");
+			s1.setRegion(1);
+			s1.shuffleRegion(1);
+			s1.PrintPuzzle();
+			
+			
+		} catch (Exception e) {
+			fail("Test failed to build a Sudoku");
+		}
+		
+	}*/
 }

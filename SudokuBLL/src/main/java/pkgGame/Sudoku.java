@@ -1,5 +1,7 @@
 package pkgGame;
 
+import java.util.Random;
+
 import pkgEnum.ePuzzleViolation;
 import pkgHelper.LatinSquare;
 import pkgHelper.PuzzleViolation;
@@ -270,5 +272,70 @@ public class Sudoku extends LatinSquare {
 		}
 		
 		return true;
+	}
+	public int getRegionNbr(int iCol, int iRow) {
+		int i = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize) ;
+		return i;
+	}
+	
+	public void FillDiagonalRegions() {
+		for(int x = 0; x<iSize;x++) {
+			for(int y = 0;y<iSize;y++) {
+				this.getPuzzle()[x][y]=0;
+			}
+		}
+		for(int i = 0;i<iSize;i+=iSqrtSize+1) {
+			setRegion(i);
+			shuffleRegion(i);
+		}
+	}
+	
+	
+	public void PrintPuzzle() {
+		for(int r = 0; r<iSize;r++) {
+			for(int c = 0; c<iSize;c++) {
+				System.out.print(getPuzzle()[r][c] + " ");
+			}
+			System.out.print("\n");
+		}
+	}
+	private void setRegion(int r) {
+		
+		int j = (r%iSqrtSize)*iSqrtSize;
+		int i = (r/iSqrtSize)*iSqrtSize;
+		int jMax = j+iSqrtSize;
+		int iMax = i+iSqrtSize;
+		int iCnt = 1;
+		for(;i<iMax;i++) {
+			for(j=(r%iSqrtSize ) * iSqrtSize;j<jMax;j++) {
+				this.getPuzzle()[i][j] = iCnt++;
+				
+			}
+		}
+	}
+	private void shuffleArray(int[] ar) {
+		Random rgen = new Random();
+		for(int i = 0;i<ar.length;i++) {
+			int randomPosition = rgen.nextInt(ar.length);
+			int temp = ar[i];
+			ar[i] = ar[randomPosition];
+			ar[randomPosition] = temp;
+		}
+		
+	}
+	public void shuffleRegion(int r) {
+		int[] nums = getRegion(r);
+		shuffleArray(nums);
+		int j = (r% iSqrtSize)*iSqrtSize;
+		int i = (r/iSqrtSize)*iSqrtSize;
+		int jMax = j+iSqrtSize;
+		int iMax = i + iSqrtSize;
+		int iCnt = 0;
+		for(;i<iMax;i++) {
+			for(j = (r%iSqrtSize)*iSqrtSize;j<jMax;j++) {
+				this.getPuzzle()[i][j] = nums[iCnt++];
+			}
+		}
+		
 	}
 }
