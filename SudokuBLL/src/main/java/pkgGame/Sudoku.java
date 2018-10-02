@@ -323,7 +323,7 @@ public class Sudoku extends LatinSquare {
 		}
 		
 	}
-	public void shuffleRegion(int r) {
+	private void shuffleRegion(int r) {
 		int[] nums = getRegion(r);
 		shuffleArray(nums);
 		int j = (r% iSqrtSize)*iSqrtSize;
