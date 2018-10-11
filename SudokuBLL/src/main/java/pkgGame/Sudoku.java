@@ -257,21 +257,9 @@ public class Sudoku extends LatinSquare {
 	 * @return - returns 'true' if the proposed value is valid for the row and column
 	 */
 	public boolean isValidValue(int iCol, int iRow, int iValue) {
-		
-		if (doesElementExist(super.getRow(iRow),iValue))
-		{
-			return false;
-		}
-		if (doesElementExist(super.getColumn(iCol),iValue))
-		{
-			return false;
-		}
-		if (doesElementExist(this.getRegion(iCol, iRow),iValue))
-		{
-			return false;
-		}
-		
-		return true;
+		return iValue>= 1 && iValue<=iSize &&
+				isValidColumnValue(iCol,iValue)&& isValidRowValue(iRow,iValue) &&
+				isValidRegionValue(iRow,iCol,iValue);
 	}
 	public int getRegionNbr(int iCol, int iRow) {
 		int i = (iCol / iSqrtSize) + ((iRow / iSqrtSize) * iSqrtSize) ;
@@ -335,7 +323,62 @@ public class Sudoku extends LatinSquare {
 			for(j = (r%iSqrtSize)*iSqrtSize;j<jMax;j++) {
 				this.getPuzzle()[i][j] = nums[iCnt++];
 			}
+		}		
+	}
+	boolean isValidColumnValue(int iCol, int iValue) {
+		if (doesElementExist(super.getColumn(iCol),iValue))
+		{
+			return false;
+		}
+		return true;
+	}
+	boolean isValidRowValue(int iRow,int iValue) {
+		if (doesElementExist(super.getRow(iRow),iValue))
+		{
+			return false;
+		}
+		return true;
+	}
+	boolean isValidRegionValue(int iRow,int iCol,int iValue) {
+		if (doesElementExist(this.getRegion(iCol, iRow),iValue))
+		{
+			return false;
 		}
 		
+		return true;
 	}
+	public boolean fillRemaining(int iRow,int iCol) {
+		int x = 0;
+		if(getPuzzle()[iRow][iCol]==0) {
+			while(!isValidValue(iRow,iCol,x)){
+				x++;
+				//back trace
+			}
+			getPuzzle()[iRow][iCol]=x;
+			if(iCol<iSize-1) {
+				fillRemaining(iRow,++iCol);
+			}
+			else if(iCol>=iSize-1){
+				fillRemaining(++iRow,0);
+			}
+			else if(iRow==iSize-1 && iCol==iSize-1){
+				
+			}
+		}
+		else if(getPuzzle()[iRow][iCol]!=0) {
+			if(iCol<iSize-1) {
+				fillRemaining(iRow,++iCol);
+			}
+			else if(iCol>=iSize-1){
+				fillRemaining(++iRow,0);
+			}
+			else if(iRow==iSize-1 && iCol==iSize-1){
+				
+			}
+		}
+		
+
+		return true;
+	}
+	
 }
